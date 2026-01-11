@@ -12,7 +12,12 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+
+    if user_signed_in?
+      @post = current_user.posts.build
+    else  
+      redirect_to root_path
+    end
   end
 
   # GET /posts/1/edit
@@ -21,7 +26,7 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     respond_to do |format|
       if @post.save
@@ -67,4 +72,4 @@ class PostsController < ApplicationController
     def post_params
       params.expect(post: [ :title, :body ])
     end
-end
+end 

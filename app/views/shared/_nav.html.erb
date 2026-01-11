@@ -1,0 +1,11 @@
+<div class=" shadow-sm  d-flex p-2">
+    <div class="container d-flex align-items-center gap-4">
+        <%= link_to "Home", root_path, class:" text-decoration-none text-success h5 m-0 " %>
+        <%= link_to "Posts", posts_path, class:" text-decoration-none text-success h5 m-0" %>
+    </div>
+    <div>
+        <%if user_signed_in? %>
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-success" %>
+        <%end%>
+    </div>
+</div>
